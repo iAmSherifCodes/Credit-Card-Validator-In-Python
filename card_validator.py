@@ -59,19 +59,18 @@ class CardValidator:
         # [4, 3, 5, 7, 6, 3, 7, 4, 3, 6, 5, 6, 8, 3, 2]
         even_num = 0
         odd_num = 0
-        for i in range(-2, -len(self.card_number), -2):
+        for i in range(-2, -len(self.card_number_to_list())-1, -2):
             # print(self.card_number_to_list()[i])
             doubling_result = self.card_number_to_list()[i] * 2
             if doubling_result > 9:
                 f = doubling_result % 10
                 s = int(doubling_result / 10)
-                doubling_result = f + s
-                even_num += doubling_result
+                even_num += f + s
             else:
                 even_num += doubling_result
 
         # ADDING CARD ODD DIGIT FROM RIGHT TO LEFT
-        for i in range(-1, -len(self.card_number)-1, -2):
+        for i in range(-1, -len(self.card_number_to_list())-1, -2):
             # print(self.card_number_to_list()[i])
             odd_num += self.card_number_to_list()[i]
 
@@ -80,8 +79,7 @@ class CardValidator:
 
         # CHECK WHETHER CARD IS VALID THROUGH ITS DIGITS
         self.is_card_valid = total_result % 10 == 0
-
-        return total_result
+        return self.is_card_valid
 
     def set_card_status(self):
         if self.sum_card_number() and self.card_number_validity():
